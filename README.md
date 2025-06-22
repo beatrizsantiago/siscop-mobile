@@ -1,50 +1,105 @@
-# Welcome to your Expo app 👋
+<h1 align="center">Siscop - Mobile App</h1>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+### ✨ Sobre
 
-## Get started
+<h4>Aplicativo feito em react native para o Hackathon da Pós Tech FIAP</h4>
 
-1. Install dependencies
+<b>Versão:</b> 1.0.0
 
-   ```bash
-   npm install
-   ```
+### 📌 Stack de Desenvolvimento
 
-2. Start the app
+- [expo](https://expo.dev/);
+- [firebase](https://firebase.google.com) para armazenamento de dados;
+- [date-fns](https://date-fns.org/) para lidar com datas;
+- [react-navigation](https://reactnavigation.org/) para roteamento da aplicação;
 
-   ```bash
-   npx expo start
-   ```
+### 🛠 Ferramentas
+- IDE: [VSCode](https://code.visualstudio.com/);
+- [Android Studio](https://developer.android.com/studio);
 
-In the output, you'll find options to open the app in a
+### 🔧 Configurações do Firebase
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+<b>1. Criar conta</b>
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+  - Crie uma conta ou [acesse o console](https://console.firebase.google.com/) do Firebase usando sua conta Google.
 
-## Get a fresh project
+<b>2. Criar um novo projeto no Firebase</b>
 
-When you're ready, run:
+  - Siga este [guia oficial](https://firebase.google.com/docs/web/setup) para criar um novo projeto.
+  - Após criar o projeto, acesse a aba Configurações do Projeto (ícone de engrenagem no menu lateral).
+  - Na seção Suas Apps, clique em "Web" para registrar uma nova aplicação Web.
+  - Ao finalizar o registro, o Firebase irá exibir o seu Firebase Config — um objeto contendo informações como apiKey, projectId, storageBucket, entre outros.
+  - Cole o conteúdo da configuração dentro de ```/firebase/config.ts```:
+   ```js
+    // /firebase/config.ts
+
+    const firebaseConfig = {
+      apiKey: "API_KEY",
+      authDomain: "DOMINIO.firebaseapp.com",
+      projectId: "PROJECT_ID",
+      storageBucket: "BUCKET.appspot.com",
+      messagingSenderId: "SENDER_ID",
+      appId: "APP_ID"
+    };
+  ```
+
+<b>3. Habilitar Autenticação e Firestore</b>
+
+  No console do Firebase, acesse:
+
+  - [Autenticação](https://firebase.google.com/docs/auth/web/email-link-auth): Habilite o método de email/senha e o login com o google para autenticação.
+  - [Firestore](https://firebase.google.com/docs/firestore/quickstart): Crie um banco de dados Firestore.
+
+<b>4. Configurar regras do Firestore</b>
+
+  No Firestore, adicione as [regras de acesso](https://firebase.google.com/docs/firestore/security/get-started) abaixo (configuração disponível na aba de "Regras"):
+  ```bash
+    rules_version = '2';
+    service cloud.firestore {
+      match /databases/{database}/documents {
+        match /{document=**} {
+          allow read, write: if true;
+        }
+      }
+    }
+  ```
+
+### 🎯 Getting Started
+
+- [Instale](https://developer.android.com/studio/install) e configure o Android Studio em seu computador. 
+
+- [Crie um dispositivo virtual](https://developer.android.com/studio/run/managing-avds) no Android Studio para rodar o projeto.
+
+Verificar Instalação do Node.js
+
+- Abra um terminal e execute o comando:
+    
+  ```bash
+  node -v
+  ```
+    
+- Se aparecer uma versão como a listada abaixo significa que o Node.js está instalado corretamente. Caso contrário, baixe e instale-o a partir do [site oficial](https://nodejs.dev/en/learn/) ou procure "Node.js" no Google.
+    
+  ```bash
+  v20.18.0
+  ```
+
+Instalar as dependências
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Iniciar projeto para android:
 
-## Learn more
+```bash
+npm run android
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Iniciar projeto para ios:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npm run ios
+```
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Após os comandos acima, o emulador será iniciado automaticamente e instalará o app Expo para utilizar o projeto.
