@@ -1,4 +1,3 @@
-import Header from '@/components/Header';
 import theme from '@/theme';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useFonts } from 'expo-font';
@@ -8,7 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import * as SplashScreen from 'expo-splash-screen';
 import 'react-native-reanimated';
 
-import DashboardScreen from './Dashboard';
+import DrawerRoutes from './Drawer';
 import LoginScreen from './Login';
 import RegisterScreen from './Register';
 
@@ -21,12 +20,12 @@ const Routes = () => (
     screenOptions={{
       animation: 'fade',
       cardStyle: { backgroundColor: theme.background.default },
-      header: (props) => <Header {...props} />,
+      headerShown: false,
     }}
   >
-    <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-    <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
-    <Stack.Screen name="Dashboard" component={DashboardScreen} />
+    <Stack.Screen name="Login" component={LoginScreen} />
+    <Stack.Screen name="Register" component={RegisterScreen} />
+    <Stack.Screen name="Main" component={DrawerRoutes} />
   </Stack.Navigator>
 );
 
