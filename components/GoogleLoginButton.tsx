@@ -15,7 +15,7 @@ const GoogleLoginButton = () => {
     try {
       const loginUseCase = new LoginUseCase(firebaseAuth);
       await loginUseCase.execute();
-      navigation.dispatch(StackActions.replace('Dashboard'));
+      navigation.dispatch(StackActions.replace('Main'));
     } catch {
       Alert.alert(
         'Erro ao fazer login',

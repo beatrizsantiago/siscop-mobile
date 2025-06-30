@@ -48,7 +48,7 @@ const Register = () => {
         password: formattedPassword,
       });
 
-      navigation.dispatch(StackActions.replace('Dashboard'));
+      navigation.dispatch(StackActions.replace('Main'));
     } catch {
       Alert.alert('Erro ao cadastrar usuário. Verifique os dados e tente novamente.');
     } finally {
