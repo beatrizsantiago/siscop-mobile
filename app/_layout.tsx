@@ -1,22 +1,53 @@
+import Header from '@/components/Header';
+import theme from '@/theme';
+import { createStackNavigator } from '@react-navigation/stack';
 import { useFonts } from 'expo-font';
+import { useEffect } from 'react';
+import { ThemeProvider } from 'styled-components';
+
+import * as SplashScreen from 'expo-splash-screen';
 import 'react-native-reanimated';
 
-import { Text, View } from 'react-native';
+import DashboardScreen from './Dashboard';
+import LoginScreen from './Login';
+import RegisterScreen from './Register';
+
+SplashScreen.preventAutoHideAsync();
+
+const Stack = createStackNavigator();
+
+const Routes = () => (
+  <Stack.Navigator
+    screenOptions={{
+      animation: 'fade',
+      cardStyle: { backgroundColor: theme.background.default },
+      header: (props) => <Header {...props} />,
+    }}
+  >
+    <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+    <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
+    <Stack.Screen name="Dashboard" component={DashboardScreen} />
+  </Stack.Navigator>
+);
 
 export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/NunitoSans.ttf'),
   });
 
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
+
   if (!loaded) {
     return null;
   }
 
   return (
-    <View style={{ flex: 1 }}>
-      <Text>
-        Hello World!
-      </Text>
-    </View>
+    <ThemeProvider theme={theme}>
+      <Routes />  
+    </ThemeProvider>
   );
-}
+};
