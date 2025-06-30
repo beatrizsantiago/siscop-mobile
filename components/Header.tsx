@@ -1,31 +1,51 @@
 import theme from '@/theme';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { DrawerHeaderProps } from '@react-navigation/drawer';
 import { getHeaderTitle } from '@react-navigation/elements';
-import { StackHeaderProps } from '@react-navigation/stack';
-import { Platform, StatusBar, TouchableOpacity } from 'react-native';
+import { StackActions } from '@react-navigation/native';
+import { Alert, Platform, StatusBar, TouchableOpacity } from 'react-native';
 import { styled } from 'styled-components/native';
 
 const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0;
 
 const HEADER_LABELS:{ [key:string]: string } = {
-  Registration: 'Cadastre-se',
-  Login: 'Seja bem vindo(a)',
+  Dashboard: 'Seja bem vindo(a)',
 };
 
-const Header = ({ navigation, route, options }:StackHeaderProps) => {
+const Header = ({ navigation, route, options }:DrawerHeaderProps) => {
   const title = getHeaderTitle(options, route.name);
   const label = HEADER_LABELS[title] || title;
 
+  const handleLogout = () => {
+    Alert.alert(
+      'Tem certeza que deseja sair?',
+      'Você será redirecionado para a tela de login.',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Sair',
+          onPress: () => navigation.dispatch(StackActions.replace('Login')),
+          style: 'destructive',
+        },
+      ],
+      { cancelable: true }
+    );
+  };
+
   return (
     <Container>
-      {label && (
-        <TitleRow>
-          <Title>{label}</Title>
-        </TitleRow>
-      )}
       <MainRow>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <MaterialIcons name="arrow-back-ios" size={24} color={theme.high.main} />
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <MaterialIcons name="menu" size={28} color={theme.high.main} />
+        </TouchableOpacity>
+
+        <Title>{label}</Title>
+
+        <TouchableOpacity onPress={handleLogout}>
+          <MaterialIcons name="logout" size={28} color={theme.high.main} />
         </TouchableOpacity>
       </MainRow>
     </Container>
@@ -44,14 +64,6 @@ const MainRow = styled.View`
   align-items: center;
   justify-content: space-between;
   padding: 16px;
-`;
-
-const TitleRow = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  width: 100%;
 `;
 
 const Title = styled.Text`
