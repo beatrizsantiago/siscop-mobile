@@ -8,7 +8,7 @@ const MENU_ITEMS = [
     label: 'Produtos',
     screen: 'Products',
     description: 'Administre os produtos: adicione, atualize, consulte ou remova conforme necessário.',
-    icon: require('@/assets/images/boxes.png'),
+    icon: require('@/assets/images/wheat_sack.png'),
   },
   {
     label: 'Fazendas',
@@ -47,6 +47,7 @@ const Dashboard = () => {
 
   return (
     <Styled.Container>
+      <Styled.Title>Escolha uma área para começar! 😄</Styled.Title>
       {MENU_ITEMS.map((item) => (
         <Styled.MenuItem
           key={item.label}

@@ -36,6 +36,14 @@ const Description = styled.Text`
   color: ${({ theme }) => theme.low.medium};
 `;
 
+const Title = styled.Text`
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
+  color: ${({ theme }) => theme.low.medium};
+`;
+
 export default {
   Container,
   MenuItem,
@@ -43,4 +51,5 @@ export default {
   ContentBox,
   Label,
   Description,
+  Title,
 };
