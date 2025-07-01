@@ -53,8 +53,8 @@ const Header = ({ navigation, route, options }:DrawerHeaderProps) => {
 };
 
 const Container = styled.View`
-  background-color: ${({ theme }) => theme.low.main};
-  height: 80px;
+  background-color: ${({ theme }) => theme.primary.main};
+  height: 60px;
   justify-content: center;
   margin-top: ${statusBarHeight}px;
 `;
