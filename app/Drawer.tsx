@@ -1,10 +1,11 @@
 import Header from '@/components/Header';
+import theme from '@/theme';
+import { FontAwesome6, MaterialIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import theme from '@/theme';
-import { MaterialIcons } from '@expo/vector-icons';
 import DashboardScreen from './Dashboard';
+import ProductsScreen from './Products';
 
 const Drawer = createDrawerNavigator();
 
@@ -20,6 +21,7 @@ const DrawerRoutes = () => (
           borderWidth: 1,
           borderStyle: 'solid',
           borderColor: theme.primary.main,
+          marginBottom: 12,
         },
       }}
     >
@@ -27,6 +29,15 @@ const DrawerRoutes = () => (
         name="Dashboard"
         component={DashboardScreen}
         options={{ drawerIcon: ({ color }) => <MaterialIcons name="dashboard" size={24} color={color} /> }}
+      />
+      <Drawer.Screen
+        name="Products" 
+        component={ProductsScreen}
+        options={{
+          drawerIcon: ({ color }) => <FontAwesome6 name="wheat-awn" size={24} color={color} />,
+          drawerLabel: 'Produtos',
+          headerTitle: 'Produtos',
+        }}
       />
     </Drawer.Navigator>
   </GestureHandlerRootView>
