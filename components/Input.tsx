@@ -1,5 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { TextInput, TextInputProps } from 'react-native';
+import { TextInput, TextInputProps, View } from 'react-native';
 import { styled } from 'styled-components/native';
 
 type Props = TextInputProps & {
@@ -10,7 +10,7 @@ type Props = TextInputProps & {
 };
 
 const Input = ({ iconName, withoutMargin = false, width = '100%', label, ...rest }:Props) => (
-  <>
+  <View>
     {label && (
       <Label>{label}</Label>
     )}
@@ -25,7 +25,7 @@ const Input = ({ iconName, withoutMargin = false, width = '100%', label, ...rest
       )}
       <Field {...rest} />
     </Container>
-  </>
+  </View>
 );
 
 const Container = styled.View<{
