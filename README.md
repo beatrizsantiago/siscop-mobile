@@ -12,6 +12,7 @@
 - [styled-components](https://styled-components.com/) para estilização de componentes;
 - [firebase](https://firebase.google.com) para armazenamento de dados;
 - [date-fns](https://date-fns.org/) para lidar com datas;
+- [react-native-maps](https://github.com/react-native-maps/react-native-maps) para utilização de mapas;
 - [react-navigation](https://reactnavigation.org/) para roteamento da aplicação;
 
 ### 🛠 Ferramentas
