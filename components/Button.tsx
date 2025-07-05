@@ -5,13 +5,14 @@ import { styled } from 'styled-components/native';
 type Props = TouchableOpacityProps & {
   title: string,
   outlined?: boolean,
-  color?: 'primary' | 'secondary';
+  color?: 'primary' | 'secondary' | 'error';
   loading?: boolean;
 };
 
 const COLORS = {
   primary: theme.primary.main,
   secondary: theme.secondary.main,
+  error: theme.error.main,
 };
 
 const Button = ({
