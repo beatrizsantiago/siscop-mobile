@@ -1,4 +1,5 @@
 import IconButton from '@/components/IconButton';
+import Loading from '@/components/Loading';
 import { formatMoney } from '@/utils/format';
 import { useNavigation } from '@react-navigation/native';
 import { View } from 'react-native';
@@ -12,6 +13,8 @@ const List = () => {
   const navigation = useNavigation();
 
   const { state } = useProductContext();
+
+  if (state.loading) return <Loading />;
 
   return (
     <Container>

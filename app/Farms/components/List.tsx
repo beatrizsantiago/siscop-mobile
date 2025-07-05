@@ -1,5 +1,6 @@
 import Button from '@/components/Button';
 import IconButton from '@/components/IconButton';
+import Loading from '@/components/Loading';
 import { useNavigation } from '@react-navigation/native';
 import MapView, { Callout, Marker } from 'react-native-maps';
 import { styled } from 'styled-components/native';
@@ -14,6 +15,8 @@ const List = () => {
   const { state } = useFarmContext();
 
   const center = state.farms[0]?.geolocation || { _lat: 0, _long: 0 };
+
+  if (state.loading) return <Loading />;
 
   return (
     <Container>
