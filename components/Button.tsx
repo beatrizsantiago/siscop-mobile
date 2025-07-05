@@ -34,7 +34,7 @@ const Button = ({
       color={currentColor}
       {...rest}
     >
-      <TextButton outlined={outlined} color={currentColor}>
+      <TextButton outlined={outlined} color={currentColor} disabled={rest.disabled}>
         {title}
       </TextButton>
       {loading && (
@@ -50,7 +50,7 @@ const Button = ({
 
 const ButtonBase = styled.TouchableOpacity<{ outlined?:boolean, bgColor: string, color: string }>`
   background-color: ${({ bgColor }) => bgColor};
-  border: ${({ outlined, color }) => outlined ? `2px solid ${color}` : 'none'};
+  border: ${({ outlined, color, disabled }) => disabled || !outlined ? 'none' : `2px solid ${color}`};
   width: 100%;
   height: 48px;
   min-height: 48px;
@@ -62,11 +62,13 @@ const ButtonBase = styled.TouchableOpacity<{ outlined?:boolean, bgColor: string,
   flex-direction: row;
 `;
 
-const TextButton = styled.Text<{  outlined?: boolean, color: string }>`
+const TextButton = styled.Text<{  outlined?: boolean, color: string, disabled?: boolean }>`
   font-size: 16px;
   font-weight: 700;
   text-align: center;
-  color: ${({ theme, outlined, color }) => outlined ? color : theme.high.main};
+  color: ${({ theme, outlined, color, disabled }) => disabled
+    ? theme.low.medium
+    : (outlined ? color : theme.high.main)};
 `;
 
 export default Button;
