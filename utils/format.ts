@@ -21,16 +21,22 @@ export const formatCurrency = (input:string) => {
   return formattedValue;
 };
 
-export const stringToFloat = (value: string):number => {
+export const stringToFloat = (value: string): number => {
   if (!value.trim()) return 0;
 
-  const cleanedValue = value
-    .trim()
-    .replace(/[R$\s]/g, '')
-    .replace(/\./g, '')
-    .replace(',', '.');
+  const cleaned = value.trim().replace(/[R$\s]/g, '');
 
-  const parsed = parseFloat(cleanedValue);
+  let normalized = cleaned;
+
+  if (cleaned.includes(',') && cleaned.includes('.')) {
+    normalized = cleaned.replace(/\./g, '').replace(',', '.');
+  } else if (cleaned.includes('.') && !cleaned.includes(',')) {
+    normalized = cleaned;
+  } else if (cleaned.includes(',') && !cleaned.includes('.')) {
+    normalized = cleaned.replace(',', '.');
+  }
+
+  const parsed = parseFloat(normalized);
 
   return isNaN(parsed) ? 0 : parsed;
 };
@@ -47,4 +53,12 @@ export const stringToInteger = (value: string):number => {
 
 export const floatToCurrency = (value:number) => {
   return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+};
+
+export const floatToString = (value:number):string => {
+  if (isNaN(value)) return '';
+
+  const formattedValue = value.toFixed(2).replace('.', ',');
+
+  return formattedValue;
 };
