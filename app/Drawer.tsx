@@ -7,6 +7,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DashboardScreen from './Dashboard';
 import FarmsScreen from './Farms';
 import InventoryScreen from './Inventory';
+import ProductionScreen from './Production';
 import ProductsScreen from './Products';
 
 const Drawer = createDrawerNavigator();
@@ -57,6 +58,15 @@ const DrawerRoutes = () => (
           drawerIcon: ({ color }) => <FontAwesome6 name="boxes-packing" size={24} color={color} />,
           drawerLabel: 'Estoque',
           headerTitle: 'Estoque',
+        }}
+      />
+      <Drawer.Screen
+        name="Production" 
+        component={ProductionScreen}
+        options={{
+          drawerIcon: ({ color }) => <FontAwesome6 name="tractor" size={24} color={color} />,
+          drawerLabel: 'Produção',
+          headerTitle: 'Produção',
         }}
       />
     </Drawer.Navigator>
