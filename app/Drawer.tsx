@@ -10,6 +10,7 @@ import GoalsScreen from './Goals';
 import InventoryScreen from './Inventory';
 import ProductionScreen from './Production';
 import ProductsScreen from './Products';
+import SalesScreen from './Sales';
 
 const Drawer = createDrawerNavigator();
 
@@ -68,6 +69,15 @@ const DrawerRoutes = () => (
           drawerIcon: ({ color }) => <FontAwesome name="line-chart" size={24} color={color} />,
           drawerLabel: 'Metas',
           headerTitle: 'Metas',
+        }}
+      />
+      <Drawer.Screen
+        name="Sales" 
+        component={SalesScreen}
+        options={{
+          drawerIcon: ({ color }) => <FontAwesome6 name="money-bills" size={24} color={color} />,
+          drawerLabel: 'Vendas',
+          headerTitle: 'Vendas',
         }}
       />
       <Drawer.Screen
