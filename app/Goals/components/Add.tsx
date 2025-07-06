@@ -39,10 +39,10 @@ const Add = () => {
 
   const lastItem = itemsList[itemsList.length - 1];
 
-  const handleSelectProduct = (index: number, product: string | null) => {
+  const handleSelectProduct = (index: number, productId: string | null) => {
     const updatedItemsList = [...itemsList];
 
-    if (!product) {
+    if (!productId) {
       updatedItemsList[index].product = {
         id: '',
         name: '',
@@ -53,7 +53,7 @@ const Add = () => {
       return;
     }
 
-    updatedItemsList[index].product = selectedFarm?.detailed_products.find((item) => item.id === product)!;
+    updatedItemsList[index].product = selectedFarm?.detailed_products.find((item) => item.id === productId)!;
     setItemsList(updatedItemsList);
   };
 
