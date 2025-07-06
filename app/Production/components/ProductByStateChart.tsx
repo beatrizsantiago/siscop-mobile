@@ -4,13 +4,15 @@ import theme from '@/theme';
 import { ProducsByStateDataType } from '@/types/chart';
 import GetDataUseCase from '@/usecases/kardex/getProductsByState';
 import { useCallback, useEffect, useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Dimensions } from 'react-native';
 import { BarChart } from 'react-native-gifted-charts';
 import { styled } from 'styled-components/native';
 
 type Props = {
   state: string;
 };
+
+const screenWidth = Dimensions.get('window').width;
 
 const ProductByStateChart = ({ state }:Props) => {
   const [chartData, setChartData] = useState<ProducsByStateDataType>([]);
@@ -36,11 +38,6 @@ const ProductByStateChart = ({ state }:Props) => {
     getChartData();
   }, [getChartData]);
 
-  const BAR_DATA = chartData.map((item) => ({
-    value: item.amount,
-    label: item.productName,
-  }));
-
   if (loading) return <Loading />;
 
   if(chartData.length === 0) {
@@ -51,12 +48,18 @@ const ProductByStateChart = ({ state }:Props) => {
     );
   };
 
+  const BAR_DATA = chartData.map((item) => ({
+    value: item.amount,
+    label: item.productName,
+  }));
+
   return (
     <BarChart
       showYAxisIndices
       noOfSections={6}
       data={BAR_DATA}
       isAnimated
+      width={screenWidth - 125}
       height={160}
       frontColor={theme.secondary.light}
       nestedScrollEnabled
