@@ -1,11 +1,12 @@
 import Header from '@/components/Header';
 import theme from '@/theme';
-import { FontAwesome6, MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome6, MaterialIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import DashboardScreen from './Dashboard';
 import FarmsScreen from './Farms';
+import GoalsScreen from './Goals';
 import InventoryScreen from './Inventory';
 import ProductionScreen from './Production';
 import ProductsScreen from './Products';
@@ -58,6 +59,15 @@ const DrawerRoutes = () => (
           drawerIcon: ({ color }) => <FontAwesome6 name="boxes-packing" size={24} color={color} />,
           drawerLabel: 'Estoque',
           headerTitle: 'Estoque',
+        }}
+      />
+      <Drawer.Screen
+        name="Goals" 
+        component={GoalsScreen}
+        options={{
+          drawerIcon: ({ color }) => <FontAwesome name="line-chart" size={24} color={color} />,
+          drawerLabel: 'Metas',
+          headerTitle: 'Metas',
         }}
       />
       <Drawer.Screen
