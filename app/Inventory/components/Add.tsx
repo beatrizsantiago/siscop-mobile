@@ -139,8 +139,8 @@ const Add = () => {
     <Container>
       <Title>Novo lançamento</Title>
 
+      <PickerLabel>Fazenda</PickerLabel>
       <PickerBox>
-        <PickerLabel>Fazenda</PickerLabel>
         <Picker
           selectedValue={selectedFarm?.id || ''}
           onValueChange={(farmId) => {
@@ -156,18 +156,20 @@ const Add = () => {
       </PickerBox>
 
       {selectedFarm && (
-        <PickerBox>
+        <>
           <PickerLabel>Estado</PickerLabel>
-          <Picker
-            selectedValue={selectedState}
-            onValueChange={(itemValue) => setSelectedState(itemValue)}
-          >
-            <Picker.Item label="Selecione..." value="" />
-            {INVENTORY_STATE_OPTIONS.map((item) => (
-              <Picker.Item key={item.value} label={item.label} value={item.value} />
-            ))}
-          </Picker>
-        </PickerBox>
+          <PickerBox>
+            <Picker
+              selectedValue={selectedState}
+              onValueChange={(itemValue) => setSelectedState(itemValue)}
+            >
+              <Picker.Item label="Selecione..." value="" />
+              {INVENTORY_STATE_OPTIONS.map((item) => (
+                <Picker.Item key={item.value} label={item.label} value={item.value} />
+              ))}
+            </Picker>
+          </PickerBox>
+        </>
       )}
 
       {selectedFarm && productsList.map((item, index) => (
@@ -261,8 +263,8 @@ const PickerLabel = styled.Text`
 `;
 
 const PickerBox = styled.View`
-  border-bottom-width: 1.5px;
-  border-bottom-color: ${({ theme }) => theme.primary.main};
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.high.main};
   margin-bottom: 24px;
 `;
 
@@ -282,6 +284,7 @@ const AmountLabel = styled.Text`
   color: ${({ theme }) => theme.primary.main};
   font-weight: 500;
   width: 30%;
+  margin-left: 18px;
 `;
 
 const ProductRow = styled.View`
@@ -292,10 +295,10 @@ const ProductRow = styled.View`
 `;
 
 const ProductPickerBox = styled.View`
-  border-bottom-width: 1.5px;
-  border-bottom-color: ${({ theme }) => theme.primary.main};
   width: 100%;
   max-width: 50%;
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.high.main};
 `;
 
 const AmountBox = styled.View`

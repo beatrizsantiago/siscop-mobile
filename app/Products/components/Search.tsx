@@ -31,6 +31,7 @@ const Search = () => {
       withoutMargin
       value={search}
       onChangeText={onUpdateSearch}
+      inline
     />
   );
 };

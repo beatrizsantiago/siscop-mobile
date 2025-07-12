@@ -73,6 +73,7 @@ const Login = () => {
           keyboardType="email-address"
           autoCapitalize="none"
           autoCorrect={false}
+          inline
         />
         <PasswordInput
           value={password}

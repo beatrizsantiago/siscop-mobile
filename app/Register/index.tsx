@@ -77,6 +77,7 @@ const Register = () => {
           placeholder="Nome"
           value={name}
           onChangeText={setName}
+          inline
         />
         <Input
           iconName="alternate-email"
@@ -86,6 +87,7 @@ const Register = () => {
           keyboardType="email-address"
           autoCapitalize="none"
           autoCorrect={false}
+          inline
         />
         <PasswordInput
           value={password}

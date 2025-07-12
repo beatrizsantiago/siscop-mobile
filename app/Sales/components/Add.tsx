@@ -159,8 +159,8 @@ const Add = () => {
     <Container>
       <Title>Nova venda</Title>
 
+      <PickerLabel>Fazenda</PickerLabel>
       <PickerBox>
-        <PickerLabel>Fazenda</PickerLabel>
         <Picker
           selectedValue={selectedFarm?.id || ''}
           onValueChange={(farmId) => {
@@ -291,8 +291,8 @@ const PickerLabel = styled.Text`
 `;
 
 const PickerBox = styled.View`
-  border-bottom-width: 1.5px;
-  border-bottom-color: ${({ theme }) => theme.primary.main};
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.high.main};
   margin-bottom: 24px;
 `;
 
@@ -304,8 +304,8 @@ const ProductLabel = styled.Text`
 `;
 
 const ProductPickerBox = styled.View`
-  border-bottom-width: 1.5px;
-  border-bottom-color: ${({ theme }) => theme.primary.main};
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.high.main};
   width: 100%;
   margin-bottom: 16px;
 `;

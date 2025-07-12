@@ -127,8 +127,8 @@ const Add = () => {
     <Container>
       <Title>Nova meta</Title>
 
+      <PickerLabel>Fazenda</PickerLabel>
       <PickerBox>
-        <PickerLabel>Fazenda</PickerLabel>
         <Picker
           selectedValue={selectedFarm?.id || ''}
           onValueChange={(farmId) => {
@@ -143,8 +143,8 @@ const Add = () => {
         </Picker>
       </PickerBox>
 
+      <PickerLabel>Tipo</PickerLabel>
       <PickerBox>
-        <PickerLabel>Tipo</PickerLabel>
         <Picker
           selectedValue={selectedKind}
           onValueChange={(itemValue) => setSelectedKind(itemValue)}
@@ -247,8 +247,8 @@ const PickerLabel = styled.Text`
 `;
 
 const PickerBox = styled.View`
-  border-bottom-width: 1.5px;
-  border-bottom-color: ${({ theme }) => theme.primary.main};
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.high.main};
   margin-bottom: 24px;
 `;
 
@@ -268,6 +268,7 @@ const AmountLabel = styled.Text`
   color: ${({ theme }) => theme.primary.main};
   font-weight: 500;
   width: 30%;
+  margin-left: 18px;
 `;
 
 const ProductRow = styled.View`
@@ -278,8 +279,8 @@ const ProductRow = styled.View`
 `;
 
 const ProductPickerBox = styled.View`
-  border-bottom-width: 1.5px;
-  border-bottom-color: ${({ theme }) => theme.primary.main};
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.high.main};
   width: 100%;
   max-width: 50%;
 `;
