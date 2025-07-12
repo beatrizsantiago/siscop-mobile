@@ -8,9 +8,10 @@ import { useFarmContext } from '../context';
 
 type Props = {
   farm: Farm;
+  afterDelete: () => void;
 };
 
-const DeleteButton = ({ farm }:Props) => {
+const DeleteButton = ({ farm, afterDelete }:Props) => {
   const { dispatch } = useFarmContext();
 
   const onDeleteClick = async () => {
@@ -23,6 +24,8 @@ const DeleteButton = ({ farm }:Props) => {
       dispatch({
         type: 'DELETE_FARM', id: farm.id,
       });
+      
+      afterDelete();
     } catch (error: any) {
       if ('message' in error && typeof error.message === 'string' && error.message.includes('REFERENCE_ERROR')) {
         Alert.alert(
@@ -59,6 +62,7 @@ const DeleteButton = ({ farm }:Props) => {
       onPress={showDeleteAlert}
       title="Excluir"
       color="error"
+      style={{ width: '48%' }}
     />
   );
 };

@@ -7,7 +7,7 @@ import theme from '@/theme';
 import UpdaeFarmUseCase from '@/usecases/farm/updateFarm';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Checkbox } from 'expo-checkbox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, FlatList, Modal } from 'react-native';
 import MapView, { MapPressEvent, Marker } from 'react-native-maps';
 import { styled } from 'styled-components/native';
@@ -90,11 +90,12 @@ const Update = () => {
       const response = await updateFarmUseCase.execute({
         id: farmData.id,
         name,
-        available_products: selectedProducts.map((p) => p.id),
         geolocation: {
           _lat: selectedPosition.latitude,
           _long: selectedPosition.longitude,
         },
+        available_products: selectedProducts.map((p) => p.id),
+        detailed_products: [],
       });
 
       dispatch({
@@ -112,6 +113,15 @@ const Update = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (products.length > 0) {
+      const selected = products.filter((p) =>
+        farmData.available_products.includes(p.id),
+      );
+      setSelectedProducts(selected);
+    }
+  }, [farmData, products]);
 
   if (productsLoading) return <ActivityIndicator />;
 
