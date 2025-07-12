@@ -20,6 +20,8 @@
 - IDE: [VSCode](https://code.visualstudio.com/);
 - [Android Studio](https://developer.android.com/studio);
 
+---
+
 ### 🔧 Configurações do Firebase
 
 <b>1. Criar conta</b>
@@ -77,11 +79,11 @@
     }
   ```
 
+---
+
 ### 🔧 Configurações do Google Maps
 
 Para utilizar o Google Maps no seu projeto com Expo, você precisará configurar uma chave de API na plataforma da Google Cloud e vinculá-la ao seu projeto para as plataformas **Android** e **iOS**.
-
----
 
 #### 🛠️ Etapas de configuração
 
@@ -100,8 +102,6 @@ Para utilizar o Google Maps no seu projeto com Expo, você precisará configurar
    - Maps SDK for iOS
 
 5. Vá para **"Chaves e credenciais"** e clique em **"Criar credenciais" > "Chave de API"**.
-
----
 
 #### 🧩 Configuração no `app.json`
 
@@ -128,6 +128,8 @@ Adicione a chave de API nas configurações de `android` e `ios` no `app.json`:
   }
 }
 ```
+
+---
 
 ### 🎯 Getting Started
 
