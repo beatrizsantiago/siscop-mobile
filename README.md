@@ -83,7 +83,7 @@
 
 ### 🔧 Configurações do Google Maps
 
-Para utilizar o Google Maps no seu projeto com Expo, você precisará configurar uma chave de API na plataforma da Google Cloud e vinculá-la ao seu projeto para as plataformas **Android** e **iOS**.
+Para utilizar o Google Maps no projeto é necessário configurar uma chave de API na plataforma da Google Cloud.
 
 #### 🛠️ Etapas de configuração
 
