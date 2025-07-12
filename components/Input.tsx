@@ -7,9 +7,17 @@ type Props = TextInputProps & {
   withoutMargin?: boolean;
   width?: string;
   label?: string;
+  inline?: boolean;
 };
 
-const Input = ({ iconName, withoutMargin = false, width = '100%', label, ...rest }:Props) => (
+const Input = ({
+  iconName,
+  withoutMargin = false,
+  width = '100%',
+  label,
+  inline = false,
+  ...rest
+}:Props) => (
   <>
     {label && (
       <Label>{label}</Label>
@@ -19,6 +27,7 @@ const Input = ({ iconName, withoutMargin = false, width = '100%', label, ...rest
       withoutMargin={withoutMargin}
       width={width}
       label={label}
+      inline={inline}
     >
       {iconName && (
         <Icon name={iconName} size={24} />
@@ -29,18 +38,24 @@ const Input = ({ iconName, withoutMargin = false, width = '100%', label, ...rest
 );
 
 const Container = styled.View<{
-  disabled: boolean, withoutMargin: boolean, width: string, label?: string
-  }>`
+  disabled: boolean,
+  withoutMargin: boolean,
+  width: string,
+  label?: string,
+  inline?: boolean,
+}>`
   width: ${({ width }) => width};
-  height: ${({ label }) => label ? '40px' : 'auto'};
+  padding: ${({ inline }) => inline ? '0px' : '0 8px'};
   margin-bottom: ${({ withoutMargin }) => withoutMargin ? '0px' : '16px'};
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-bottom-width: 1.5px;
-  border-bottom-color: ${({ theme }) => theme.primary.main};
-  border-radius: 2px;
-  background-color: ${({ theme, disabled }) => disabled ? theme.gray.light : 'transparent'};
+  border-bottom-width: ${({ inline }) => inline ? '1.5px' : '0px' };
+  border-bottom-color: ${({ theme, inline }) => inline ? theme.primary.main : 'none' };
+  border-radius: ${({ inline }) => inline ? '2px' : '8px' };
+  background-color: ${({ theme, disabled, inline }) => (
+    disabled ? theme.gray.light : (inline ? 'transparent' : theme.high.main)
+  )};
 `;
 
 const Field = styled(TextInput)`
