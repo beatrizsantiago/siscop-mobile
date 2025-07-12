@@ -15,6 +15,7 @@ const PasswordInput = ({ ...rest }:TextInputProps) => {
         iconName="password"
         placeholder="Senha"
         secureTextEntry={!showPassword}
+        inline
       />
       <IconButton onPress={() => setShowPassword((current) => !current)}>
         {showPassword ? (
