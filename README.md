@@ -32,28 +32,38 @@
   - Após criar o projeto, acesse a aba Configurações do Projeto (ícone de engrenagem no menu lateral).
   - Na seção Suas Apps, clique em "Web" para registrar uma nova aplicação Web.
   - Ao finalizar o registro, o Firebase irá exibir o seu Firebase Config — um objeto contendo informações como apiKey, projectId, storageBucket, entre outros.
-  - Cole o conteúdo da configuração dentro de ```/firebase/config.ts```:
-   ```js
-    // /firebase/config.ts
 
-    const firebaseConfig = {
-      apiKey: "API_KEY",
-      authDomain: "DOMINIO.firebaseapp.com",
-      projectId: "PROJECT_ID",
-      storageBucket: "BUCKET.appspot.com",
-      messagingSenderId: "SENDER_ID",
-      appId: "APP_ID"
-    };
+<b>3. Configuração do ambiente</b>
+
+  1. **Crie um arquivo chamado** `env.ts` **na raiz do projeto.**
+
+  2. **Copie e preencha a estrutura abaixo com os dados fornecidos pelo Firebase:**
+
+   ```js
+    // env.ts
+
+    export const FIREBASE_API_KEY = 'API_KEY';
+    export const FIREBASE_AUTH_DOMAIN = 'DOMINIO.firebaseapp.com';
+    export const FIREBASE_PROJECT_ID = 'PROJECT_ID';
+    export const FIREBASE_STORAGE_BUCKET = 'BUCKET.appspot.com';
+    export const FIREBASE_MESSAGING_SENDER_ID = 'SENDER_ID';
+    export const FIREBASE_APP_ID = 'APP_ID';
   ```
 
-<b>3. Habilitar Autenticação e Firestore</b>
+  3. Um arquivo de exemplo chamado ```env.example.ts``` está disponível no projeto. Use-o como base para criar o seu arquivo de configuração:
+
+  ```bash
+  cp env.example.ts env.ts
+  ```
+
+<b>4. Habilitar Autenticação e Firestore</b>
 
   No console do Firebase, acesse:
 
   - [Autenticação](https://firebase.google.com/docs/auth/web/email-link-auth): Habilite o método de email/senha e o login com o google para autenticação.
   - [Firestore](https://firebase.google.com/docs/firestore/quickstart): Crie um banco de dados Firestore.
 
-<b>4. Configurar regras do Firestore</b>
+<b>5. Configurar regras do Firestore</b>
 
   No Firestore, adicione as [regras de acesso](https://firebase.google.com/docs/firestore/security/get-started) abaixo (configuração disponível na aba de "Regras"):
   ```bash
@@ -66,6 +76,58 @@
       }
     }
   ```
+
+### 🔧 Configurações do Google Maps
+
+Para utilizar o Google Maps no seu projeto com Expo, você precisará configurar uma chave de API na plataforma da Google Cloud e vinculá-la ao seu projeto para as plataformas **Android** e **iOS**.
+
+---
+
+#### 🛠️ Etapas de configuração
+
+1. **Acesse o Console do Google Cloud:**
+
+   [https://console.cloud.google.com/](https://console.cloud.google.com/)
+
+2. **Crie um novo projeto** (ou selecione um existente).
+
+3. No menu lateral, vá em **"APIs e serviços"**.
+
+4. **Habilite as seguintes APIs:**
+
+   - Maps JavaScript API
+   - Maps SDK for Android
+   - Maps SDK for iOS
+
+5. Vá para **"Chaves e credenciais"** e clique em **"Criar credenciais" > "Chave de API"**.
+
+---
+
+#### 🧩 Configuração no `app.json`
+
+Adicione a chave de API nas configurações de `android` e `ios` no `app.json`:
+
+```json
+{
+  "expo": {
+    // ... outras configurações
+
+    "ios": {
+      "config": {
+        "googleMapsApiKey": "SUA_API_KEY_DO_GOOGLE"
+      },
+      "supportsTablet": true
+    },
+    "android": {
+      "config": {
+        "googleMaps": {
+          "apiKey": "SUA_API_KEY_DO_GOOGLE"
+        }
+      }
+    }
+  }
+}
+```
 
 ### 🎯 Getting Started
 
