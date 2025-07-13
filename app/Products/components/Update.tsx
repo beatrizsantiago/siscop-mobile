@@ -70,8 +70,11 @@ const Update = () => {
       });
 
       navigation.goBack()
-    } catch (error) {
-      console.log(error);
+    } catch {
+      Alert.alert(
+        'Oops!',
+        'Ocorreu um erro ao atualizar o produto. Tente novamente mais tarde.',
+      );
     } finally {
       setLoading(false);
     }
