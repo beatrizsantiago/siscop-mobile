@@ -20,10 +20,11 @@ const HeaderTitle = styled.Text`
 `;
 
 const NotificationItem = styled.View`
-  padding: 16px 0;
-  border-bottom-width: 1px;
-  border-bottom-color: ${({ theme }) => theme.gray.light};
   flex-direction: row;
+  background-color: ${({ theme }) => theme.high.main};
+  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 16px;
 `;
 
 const NotificationContainer = styled.View`
