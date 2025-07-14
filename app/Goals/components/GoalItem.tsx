@@ -15,9 +15,18 @@ type Props = {
 const GoalItem = ({ item }:Props) => {
   const [showDetails, setShowDetails] = useState(false);
 
+  const isFinished = item.finished;
+
   return (
     <Container onPress={() => setShowDetails(!showDetails)}>
       <View>
+        {isFinished && (
+          <Chip>
+            <ChipText>
+              Finalizada
+            </ChipText>
+          </Chip>
+        )}
         <Title>
           Meta de
           {' '}
@@ -34,7 +43,9 @@ const GoalItem = ({ item }:Props) => {
         <Subtitle>
           {formatDate(item.created_at, "dd/MM/yyyy 'às' HH:mm'h'")}
         </Subtitle>
-        <DeleteButton goal={item} />
+        {!isFinished && (
+          <DeleteButton goal={item} />
+        )}
       </View>
       <Collapse isOpen={showDetails}>
         <View>
@@ -111,6 +122,24 @@ const FarmLabel = styled.Text`
   font-size: 16px;
   color: ${({ theme }) => theme.primary.main};
   font-weight: 700;
+`;
+
+const Chip = styled.View`
+  background-color: ${({ theme }) => theme.secondary.dark};
+  height: 28px;
+  width: 140px;
+  padding: 0 16px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+`;
+
+const ChipText = styled.Text`
+  color: ${({ theme }) => theme.high.main};
+  font-size: 12px;
+  font-weight: 600;
 `;
 
 export default GoalItem;
