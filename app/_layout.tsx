@@ -9,6 +9,7 @@ import 'react-native-reanimated';
 
 import DrawerRoutes from './Drawer';
 import LoginScreen from './Login';
+import NotificationsScreen from './Notifications';
 import RegisterScreen from './Register';
 
 SplashScreen.preventAutoHideAsync();
@@ -26,6 +27,7 @@ const Routes = () => (
     <Stack.Screen name="Login" component={LoginScreen} />
     <Stack.Screen name="Register" component={RegisterScreen} />
     <Stack.Screen name="Main" component={DrawerRoutes} />
+    <Stack.Screen name="Notifications" component={NotificationsScreen} />
   </Stack.Navigator>
 );
 
