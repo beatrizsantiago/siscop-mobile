@@ -1,3 +1,4 @@
+import CustomDrawerContent from '@/components/CustomDrawerContent';
 import Header from '@/components/Header';
 import theme from '@/theme';
 import { FontAwesome, FontAwesome6, MaterialIcons } from '@expo/vector-icons';
@@ -18,6 +19,7 @@ const DrawerRoutes = () => (
   <GestureHandlerRootView style={{ flex: 1 }}>
     <Drawer.Navigator
       initialRouteName="Dashboard"
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
         header: (props) => <Header {...props} />,
         drawerActiveTintColor: theme.primary.main,
