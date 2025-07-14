@@ -5,6 +5,7 @@ import { GoalRepository } from '@/domain/repositories/GoalRepository';
 import {
   addDoc, collection, deleteDoc, doc, DocumentSnapshot,
   getDoc, getDocs, limit, orderBy, query, startAfter, Timestamp,
+  updateDoc, where,
 } from 'firebase/firestore';
 
 import { firestore } from './config';
@@ -83,6 +84,7 @@ class FirebaseGoal implements GoalRepository {
         return {
           product,
           amount: itemData.amount,
+          product_id: itemData.product_id,
         };
       }));
 
@@ -105,6 +107,65 @@ class FirebaseGoal implements GoalRepository {
 
   async delete(id: string): Promise<void> {
     return await deleteDoc(doc(firestore, 'goals', id));
+  }
+
+  async findPendingProductionGoals(
+    farmId: string,
+    before: Date
+  ): Promise<Goal[]> {
+    const goalsCol = collection(firestore, 'goals');
+
+    const farmRef = doc(firestore, 'farms', farmId);
+
+    const q = query(
+      goalsCol,
+      where('farm_id', '==', farmRef),
+      where('kind', '==', 'PRODUCTION'),
+      where('finished', '==', false),
+      where('created_at', '<=', Timestamp.fromDate(before)),
+      orderBy('created_at', 'asc'),
+    );
+
+    const snap = await getDocs(q);
+
+    const data = snap.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as Goal[];
+
+    return data;
+  }
+
+  async findPendingSalesGoals(
+    farmId: string,
+    before: Date
+  ): Promise<Goal[]> {
+    const goalsCol = collection(firestore, 'goals');
+
+    const farmRef = doc(firestore, 'farms', farmId);
+
+    const q = query(
+      goalsCol,
+      where('farm_id', '==', farmRef),
+      where('kind', '==', 'SALE'),
+      where('finished', '==', false),
+      where('created_at', '<=', Timestamp.fromDate(before)),
+      orderBy('created_at', 'asc'),
+    );
+
+    const snap = await getDocs(q);
+
+    const data = snap.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as Goal[];
+
+    return data;
+  }
+
+  async markAsFinished(goalId: string): Promise<void> {
+    const ref = doc(firestore, 'goals', goalId);
+    await updateDoc(ref, { finished: true });
   }
 };
 

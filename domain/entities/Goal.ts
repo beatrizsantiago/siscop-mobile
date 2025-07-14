@@ -1,9 +1,12 @@
+import { DocumentReference } from 'firebase/firestore';
+
 import Farm from './Farm';
 import Product from './Product';
 
 type Item = {
   product: Product,
   amount: number,
+  product_id: DocumentReference,
 };
 
 class Goal {

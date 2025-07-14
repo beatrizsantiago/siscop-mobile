@@ -5,17 +5,19 @@ import Loading from '@/components/Loading';
 import Farm from '@/domain/entities/Farm';
 import Inventory from '@/domain/entities/Inventory';
 import useGetFarms from '@/hooks/useGetFarms';
+import { firebaseGoal } from '@/infrastructure/firebase/goal';
+import { firebaseInventory } from '@/infrastructure/firebase/inventory';
+import { firebaseKardex } from '@/infrastructure/firebase/kardex';
+import { firebaseNotification } from '@/infrastructure/firebase/notification';
+import AddInventoryUseCase from '@/usecases/inventory/add';
 import { stringToInteger } from '@/utils/format';
 import { INVENTORY_STATE_OPTIONS } from '@/utils/inventoryStateList';
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
+import { Alert } from 'react-native';
 import { styled } from 'styled-components/native';
 
-import { firebaseInventory } from '@/infrastructure/firebase/inventory';
-import { firebaseKardex } from '@/infrastructure/firebase/kardex';
-import AddInventoryUseCase from '@/usecases/inventory/add';
-import { Alert } from 'react-native';
 import { useInventoryContext } from '../context';
 
 const Add = () => {
@@ -103,7 +105,9 @@ const Add = () => {
     setLoading(true);
 
     try {
-      const addInventoryUseCase = new AddInventoryUseCase(firebaseInventory, firebaseKardex);
+      const addInventoryUseCase = new AddInventoryUseCase(
+        firebaseInventory, firebaseKardex, firebaseGoal, firebaseNotification
+      );
       const response = await addInventoryUseCase.execute({
         farm: selectedFarm!,
         items: productsList,
@@ -118,6 +122,7 @@ const Add = () => {
       Alert.alert('Sucesso!', 'Estoque adicionado com sucesso!');
       navigation.goBack();
     } catch (error: any) {
+      console.log(error)
       if ('message' in error && typeof error.message === 'string' && error.message.includes('INSUFFICIENT_STOCK')) {
         const productName = error.message.split(':')[1];
         Alert.alert(

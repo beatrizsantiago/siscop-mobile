@@ -7,4 +7,5 @@ export interface NotificationRepository {
     lastDoc?: DocumentSnapshot;
     hasMore: boolean;
   }>;
+  create(params: Notification): Promise<void>;
 };

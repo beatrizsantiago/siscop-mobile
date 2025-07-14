@@ -5,7 +5,9 @@ import Loading from '@/components/Loading';
 import Farm from '@/domain/entities/Farm';
 import Product from '@/domain/entities/Product';
 import useGetFarms from '@/hooks/useGetFarms';
+import { firebaseGoal } from '@/infrastructure/firebase/goal';
 import { firebaseKardex } from '@/infrastructure/firebase/kardex';
+import { firebaseNotification } from '@/infrastructure/firebase/notification';
 import { firebaseSale } from '@/infrastructure/firebase/sale';
 import AddSaleUseCase from '@/usecases/sale/add';
 import { stringToFloat, stringToInteger } from '@/utils/format';
@@ -110,7 +112,9 @@ const Add = () => {
     setLoading(true);
 
     try {
-      const addUseCase = new AddSaleUseCase(firebaseSale, firebaseKardex);
+      const addUseCase = new AddSaleUseCase(
+        firebaseSale, firebaseKardex, firebaseGoal, firebaseNotification,
+      );
       const response = await addUseCase.execute({
         items: itemsList
           .map((item) => ({
