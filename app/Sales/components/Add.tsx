@@ -10,7 +10,7 @@ import { firebaseKardex } from '@/infrastructure/firebase/kardex';
 import { firebaseNotification } from '@/infrastructure/firebase/notification';
 import { firebaseSale } from '@/infrastructure/firebase/sale';
 import AddSaleUseCase from '@/usecases/sale/add';
-import { stringToFloat, stringToInteger } from '@/utils/format';
+import { floatToString, stringToFloat, stringToInteger } from '@/utils/format';
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
@@ -58,7 +58,15 @@ const Add = () => {
       return;
     }
 
-    updatedItemsList[index].product = selectedFarm?.detailed_products.find((item) => item.id === productId)!;
+    const p = selectedFarm?.detailed_products.find((item) => item.id === productId)!;
+
+    updatedItemsList[index].product = {
+      id: p.id,
+      name: p.name,
+      unit_value: p.unit_value,
+      cycle_days: p.cycle_days,
+    };
+    updatedItemsList[index].value = floatToString(p.unit_value);
     setItemsList(updatedItemsList);
   };
 
